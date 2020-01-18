@@ -7,7 +7,7 @@ export default class extends Component {
             <input onChange={() => this.props.toggleTask(this.props.id)}
                 type="checkbox"
             />
-            <span>{this.props.name}</span>
+            <span>{this.props.task}</span>
             <button onClick={() => this.props.removeTask(this.props.id)}>x</button>
         </div>
     }

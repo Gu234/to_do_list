@@ -16,26 +16,24 @@ export default class extends Component {
     addTask = () => {
         if (this.state.newTaskName !== '')
             this.setState({
-                tasks: [...this.state.tasks, [this.state.newTaskName, true]],
+                tasks: [...this.state.tasks, [this.state.newTaskName, true,Date.now()]],
                 newTaskName: '',
                 TasksCounter: this.state.TasksCounter + 1
             })
     }
 
-    toggleTask = index => {
-        console.log('fe');
-
+    toggleTask = date => {
         this.setState({
-            tasks: this.state.tasks.map((e, i) => {
-                if (index === i)
+            tasks: this.state.tasks.map((e) => {
+                if (date === e[2])
                     e[1] ? e[1] = false : e[1] = true
                 return e
             })
         })
     }
 
-    removeTask = index => this.setState({
-        tasks: this.state.tasks.filter((e, i) => i !== index)
+    removeTask = date => this.setState({
+        tasks: this.state.tasks.filter((e) => e[2] !== date)
     })
 
     clearFinnishedTasks = () => {
@@ -56,12 +54,12 @@ export default class extends Component {
 
             </input>
             <button onClick={this.addTask}>+</button>
-            <div className='toDoList-tasktable'>{this.state.tasks.map((name, key) => <Task
+            <div className='toDoList-tasktable'>{this.state.tasks.map((task) => <Task
                 toggleTask={this.toggleTask}
                 removeTask={this.removeTask}
-                key={key}
-                id={key}
-                name={name[0]}></Task>)}</div>
+                key={task[2]}
+                id={task[2]}
+                task={task[0]}></Task>)}</div>
             <div>Unfinnished tasks:{this.state.tasks.reduce((acc, item) => acc + item[1], 0)}</div>
             <button onClick={this.clearFinnishedTasks}>Clear Finnished Tasks</button>
         </>
