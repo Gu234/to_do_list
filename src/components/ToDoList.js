@@ -14,31 +14,35 @@ export default class extends Component {
     }
 
     addTask = () => {
-        if (this.state.newTaskName !== '')
-            this.setState({
-                tasks: [...this.state.tasks, [this.state.newTaskName, true,Date.now()]],
-                newTaskName: '',
-                TasksCounter: this.state.TasksCounter + 1
-            })
+        if (this.state.newTaskName === '') return;
+        const newTask = {
+            name: this.state.newTaskName,
+            isDone: false,
+            id: Date.now()
+        };
+        this.setState({
+            tasks: [...this.state.tasks, newTask],
+            newTaskName: '',
+        })
     }
 
-    toggleTask = date => {
+    toggleTask = id => {
         this.setState({
-            tasks: this.state.tasks.map((e) => {
-                if (date === e[2])
-                    e[1] ? e[1] = false : e[1] = true
-                return e
+            tasks: this.state.tasks.map((task) => {
+                if (id === task.id)
+                    task.isDone = !task.isDone
+                return task
             })
         })
     }
 
-    removeTask = date => this.setState({
-        tasks: this.state.tasks.filter((e) => e[2] !== date)
+    removeTask = id => this.setState({
+        tasks: this.state.tasks.filter((task) => task.id !== id)
     })
 
-    clearFinnishedTasks = () => {
+    clearDoneTasks = () => {
         this.setState({
-            tasks: this.state.tasks.filter(i => i[1])
+            tasks: this.state.tasks.filter(task => !task.isDone)
         })
     }
 
@@ -57,11 +61,11 @@ export default class extends Component {
             <div className='toDoList-tasktable'>{this.state.tasks.map((task) => <Task
                 toggleTask={this.toggleTask}
                 removeTask={this.removeTask}
-                key={task[2]}
-                id={task[2]}
-                task={task[0]}></Task>)}</div>
-            <div>Unfinnished tasks:{this.state.tasks.reduce((acc, item) => acc + item[1], 0)}</div>
-            <button onClick={this.clearFinnishedTasks}>Clear Finnished Tasks</button>
+                key={task.id}
+                id={task.id}
+                task={task.name}></Task>)}</div>
+            <div>Unfinished tasks:{this.state.tasks.filter(task => !task.isDone).length}</div>
+            <button onClick={this.clearDoneTasks}>Clear Done Tasks</button>
         </>
     }
 }
