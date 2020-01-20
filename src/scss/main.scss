@@ -1,0 +1,14 @@
+@import './components/Task';
+@import './components/ToDoList';
+
+.container {
+    width: 350px;
+    margin: auto;
+}
+h1{
+    text-align: center;
+}
+
+body{
+    background-color: lightgray;
+}

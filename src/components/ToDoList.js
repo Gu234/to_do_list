@@ -47,25 +47,30 @@ export default class extends Component {
     }
 
     render() {
-        return <>
-            <input
-                name='newTaskName'
-                value={this.state.newTaskName}
-                placeholder='Add new task'
-                type='text'
-                onChange={this.handleChange}
-            >
+        return <div>
+            <div className='line'>
+                <input
+                    className='toDoList-newTaskName'
+                    name='newTaskName'
+                    value={this.state.newTaskName}
+                    placeholder='Add new task'
+                    type='text'
+                    onChange={this.handleChange}
+                >
 
-            </input>
-            <button onClick={this.addTask}>+</button>
-            <div className='toDoList-tasktable'>{this.state.tasks.map((task) => <Task
+                </input>
+                <button className='leftButtons' onClick={this.addTask}>+</button>
+            </div>
+            <div className='toDoList-tasks'>{this.state.tasks.map((task) => <Task
                 toggleTask={this.toggleTask}
                 removeTask={this.removeTask}
                 key={task.id}
                 id={task.id}
                 task={task.name}></Task>)}</div>
-            <div>Unfinished tasks:{this.state.tasks.filter(task => !task.isDone).length}</div>
-            <button onClick={this.clearDoneTasks}>Clear Done Tasks</button>
-        </>
+            <div className='line'>
+                <div>Tasks Left:{this.state.tasks.filter(task => !task.isDone).length}</div>
+                <button onClick={this.clearDoneTasks}>Clear Completed Tasks</button>
+            </div>
+        </div>
     }
 }

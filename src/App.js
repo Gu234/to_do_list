@@ -1,12 +1,14 @@
 import React from 'react';
-import ToDoList from './components/ToDoList'
+import ToDoList from './components/ToDoList';
+import './scss/main.scss';
 
 function App() {
-  return <>
-    <h1>To Do List</h1>
-    <ToDoList></ToDoList>
-  </>
-
+  return <div className='container'>
+    <div className='toDoList'>
+      <h1>To Do List</h1>
+      <ToDoList></ToDoList>
+    </div>
+  </div>
 }
 
 export default App;

@@ -1,0 +1,28 @@
+.toDoList{
+    margin-top: 40px;
+    border: 1px solid red;
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    box-shadow: 3px 3px black;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.toDoList-newTaskName{
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+
+.leftButtons{
+    width: 20px;
+    padding: 0;
+}
+
+.line{
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
