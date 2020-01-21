@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Task from './Task'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default class extends Component {
     state = {
@@ -55,20 +57,25 @@ export default class extends Component {
                     value={this.state.newTaskName}
                     placeholder='Add new task'
                     type='text'
+                    maxLength='20'
                     onChange={this.handleChange}
                 >
 
                 </input>
-                <button className='leftButtons' onClick={this.addTask}>+</button>
+                <button className='smallButton' onClick={this.addTask}>
+                    <FontAwesomeIcon size='xs' icon={faPlus} />
+                </button>
             </div>
             <div className='toDoList-tasks'>{this.state.tasks.map((task) => <Task
                 toggleTask={this.toggleTask}
                 removeTask={this.removeTask}
                 key={task.id}
                 id={task.id}
-                task={task.name}></Task>)}</div>
+                isDone={task.isDone}
+                task={task.name}></Task>)}
+            </div>
             <div className='line'>
-                <div>Tasks Left:{this.state.tasks.filter(task => !task.isDone).length}</div>
+                <div>Tasks Left: {this.state.tasks.filter(task => !task.isDone).length}</div>
                 <button onClick={this.clearDoneTasks}>Clear Completed Tasks</button>
             </div>
         </div>
